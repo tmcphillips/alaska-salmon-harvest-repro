@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<eml:eml xmlns:eml="eml://ecoinformatics.org/eml-2.1.1" xmlns:stmml="http://www.xml-cml.org/schema/stmml-1.1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" packageId="doi:10.5063/F1BV7DV0" system="https://arcticdata.io" xsi:schemaLocation="eml://ecoinformatics.org/eml-2.1.1 eml.xsd">
+  <dataset>
+    <title>Harvest of Salmon across Commercial, Subsistence, Personal Use, and Sport Fish sectors, Alaska, 1995-2016</title>
+    <creator id="3034610489137602">
+      <individualName>
+        <givenName>Jeanette</givenName>
+        <surName>Clark</surName>
+      </individualName>
+      <organizationName>National Center for Ecological Analysis and Synthesis</organizationName>
+      <positionName>Projects Data Coordinator</positionName>
+      <electronicMailAddress>jclark@nceas.ucsb.edu</electronicMailAddress>
+      <userId directory="https://orcid.org">http://orcid.org/0000-0003-4703-1974</userId>
+    </creator>
+    <creator id="6965513166295836">
+      <organizationName>Alaska Department of Fish and Game, Division of Commercial Fisheries</organizationName>
+      <organizationName>Alaska Department of Fish and Game, Division of Sport Fish</organizationName>
+      <organizationName>Alaska Department of Fish and Game, Division of Subsistence</organizationName>
+    </creator>
+    <abstract>
+      <para>This data represents harvest of salmon in Alaska across the commercial, subsistence, personal use, and sport fish sectors. Each of these harvest sectors has a distinct permitting system governed by different departments within the Alaska Department of Fish and Game (ADFG). Commercial harvest is regulated under the Commercial Entry Fishery Commission (CFEC), and refers to the harvest of fish for the purposes of selling them to another party. Subsistence harvest is regulated under the ADFG Subsistence Division, and refers to the harvest of fish for customary and traditional use. Whether use of a stock of fish is considered a "customary and traditional" use is determined by several factors, including length and consistency of use, seasonality, methods and means of harvest, geographic areas, means of handling, preparing, preserving, and storing, intergenerational transmission of knowledge and skills, distribution and exchange, and diversity of resources in an area. Personal use harvest is also governed by the ADFG Subsistence Division. The personal use fishery was created in response to the enactment of the state's subsistence priority law, which precluded some individuals from participating in customary and traditional subsistence fisheries because the stocks they fish are not classified as customary and traditional use stocks. Because the gear associated with the personal use fishery is distinct from the gear typically associated with the sport fishery, the personal use fishery was kept distinct from the sport fishery to prevent confusion amongst the public. More information on the personal use fishery can be found in the Alaska state regulations, Chapter 77 "Personal Use Fishery, Article 1” (5 AAC 77.001). Sport fish harvest is regulated under the ADFG Division of Sport Fish, and refers to the taking of or attempting to take for personal consumption, and not for sale or barter, a fish by hook and line either held in the hand or closely attended.</para>
+      <para>These data are derived from four source datasets:</para>
+      <para>Subsistence and Personal Use Harvest - https://knb.ecoinformatics.org/#view/urn:uuid:7e4586c0-9812-4355-8f3b-1445b9a8ca53</para>
+      <para>Commercial Harvest (CFEC) - https://knb.ecoinformatics.org/#view/urn:uuid:40473bde-9774-4581-aafb-5d2c3b4a70d1</para>
+      <para>Commercial Harvest(ADFG Annual Management Reports) - https://knb.ecoinformatics.org/#view/urn:uuid:31b421f3-c48c-473a-bc20-601c738b3a3c</para>
+      <para>Sportfish Harvest - https://knb.ecoinformatics.org/#view/urn:uuid:6a6a530f-3660-424f-adab-c771d1c89a5d)</para>
+      <para>The included .Rmd file sources files from these datasets, aggregates over regions to obtain total harvest by species and region, and merges data from all of the sectors into a single file (Harvest_All_Sectors.csv). The .Rmd file also creates basic plots of harvest by sector by region.</para>
+    </abstract>
+    <keywordSet>
+      <keyword>harvest</keyword>
+      <keyword>featured</keyword>
+      <keyword>well being</keyword>
+    </keywordSet>
+    <intellectualRights>
+      <para>This work is licensed under the Creative Commons Attribution 4.0 International License. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/.</para>
+    </intellectualRights>
+    <coverage>
+      <geographicCoverage>
+        <geographicDescription>Alaska</geographicDescription>
+        <boundingCoordinates>
+          <westBoundingCoordinate>-176</westBoundingCoordinate>
+          <eastBoundingCoordinate>-131</eastBoundingCoordinate>
+          <northBoundingCoordinate>78</northBoundingCoordinate>
+          <southBoundingCoordinate>47</southBoundingCoordinate>
+        </boundingCoordinates>
+      </geographicCoverage>
+      <temporalCoverage>
+        <rangeOfDates>
+          <beginDate>
+            <calendarDate>1995</calendarDate>
+          </beginDate>
+          <endDate>
+            <calendarDate>2016</calendarDate>
+          </endDate>
+        </rangeOfDates>
+      </temporalCoverage>
+      <taxonomicCoverage>
+        <taxonomicClassification>
+          <taxonRankName>genus</taxonRankName>
+          <taxonRankValue>Oncorhynchus</taxonRankValue>
+          <taxonomicClassification>
+            <taxonRankName>species</taxonRankName>
+            <taxonRankValue>Oncorhynchus tshawytscha</taxonRankValue>
+          </taxonomicClassification>
+        </taxonomicClassification>
+        <taxonomicClassification>
+          <taxonRankName>genus</taxonRankName>
+          <taxonRankValue>Oncorhynchus</taxonRankValue>
+          <taxonomicClassification>
+            <taxonRankName>species</taxonRankName>
+            <taxonRankValue>Oncorhynchus keta</taxonRankValue>
+          </taxonomicClassification>
+        </taxonomicClassification>
+        <taxonomicClassification>
+          <taxonRankName>genus</taxonRankName>
+          <taxonRankValue>Oncorhynchus</taxonRankValue>
+          <taxonomicClassification>
+            <taxonRankName>species</taxonRankName>
+            <taxonRankValue>Oncorhynchus kisutch</taxonRankValue>
+          </taxonomicClassification>
+        </taxonomicClassification>
+        <taxonomicClassification>
+          <taxonRankName>genus</taxonRankName>
+          <taxonRankValue>Oncorhynchus</taxonRankValue>
+          <taxonomicClassification>
+            <taxonRankName>species</taxonRankName>
+            <taxonRankValue>Oncorhynchus gorbuscha</taxonRankValue>
+          </taxonomicClassification>
+        </taxonomicClassification>
+        <taxonomicClassification>
+          <taxonRankName>genus</taxonRankName>
+          <taxonRankValue>Oncorhynchus</taxonRankValue>
+          <taxonomicClassification>
+            <taxonRankName>species</taxonRankName>
+            <taxonRankValue>Oncorhynchus nerka</taxonRankValue>
+          </taxonomicClassification>
+        </taxonomicClassification>
+      </taxonomicCoverage>
+    </coverage>
+    <contact id="3753573335247278">
+      <individualName>
+        <givenName>Jeanette</givenName>
+        <surName>Clark</surName>
+      </individualName>
+      <organizationName>National Center for Ecological Analysis and Synthesis</organizationName>
+      <positionName>Projects Data Coordinator</positionName>
+      <electronicMailAddress>jclark@nceas.ucsb.edu</electronicMailAddress>
+      <userId directory="https://orcid.org">http://orcid.org/0000-0003-4703-1974</userId>
+    </contact>
+    <methods>
+      <methodStep>
+        <description>
+          <para>Subsistence and Personal Use data collection and reformatting:
+Fishing permits and postseason household surveys are used to assess subsistence salmon harvests in the management areas in Alaska. Fishing permits vary by subdistrict and are returned to the Alaska Department of Fish and Game (ADFG) if not used. Household surveys are conducted by the Division of Commercial Fisheries in certain subdistricts after the end of the season. Postseason surveys are used to estimate subsistence salmon by species and community; compile information on harvest by gear types, participation rates, household size, use of salmon, and participation in customary barter and trade; as well as assess the quality of salmon fishing and what affected it.
+
+Certain subsistence fisheries span multiple SASAP Regions. Cook Inlet and Prince William Sound Educational Permits span two regions. The vast majority of these permits are held by Cook Inlet residents, so this fishery is assigned to Cook Inlet. The Northwest Alaska subsistence fishery encompasses waters located both Norton Sound and Kotzebue. The residency of permitholders in the Northwest Fishery is split between Norton Sound and Kotzebue, with Norton Sound residents taking ~2/3 of the catch in this fishery. A tiny percentage of the catch is taken by residents of other parts of the state. Since both of these regions are remote and rural, it is reasonable to assume that Kotzebue residents mostly fish in Kotzebue, and Norton Sound residents mostly fish in Norton Sound. Thus, the region of origin of the fish was assigned based on the residence of the permit holder for this fishery only. The small percentage of the catch (&lt; 5% annually) caught by residents of other parts of the state is assigned to Norton Sound. With the exception of these two fisheries, the SASAP region is assigned based on the location of the fishery.
+
+</para>
+        </description>
+      </methodStep>
+      <methodStep>
+        <description>
+          <para>Commercial Harvest data collection and reformatting:
+Two sources are used for Commercial Harvest data. One dataset comes directly from the Commercial Fisheries Entry Commision (CFEC), and shows harvest at the district level, by species and gear type. The CFEC data is derived from individual fish tickets. In this dataset, commercial data with fewer than 3 people, permits, or processors in a fishery are confidental and thus not shown.
+
+A second data source, the official ADFG Annual Management Reports, was incorporated where possible. These reports have data for commercial catch by species at the management area level. For various reasons, these data are far less susceptible to confidentiality issues, and thus in some regions can fill in considerable gaps left by the CFEC data. ADFG management report data was compiled for all regions except Prince William Sound, Southeast, and Arctic. The Arctic does not have any active commercial fisheries, so it was not included. Prince William Sound and Southeast management reports have structures that made it difficult to extract data in the same way as the CFEC data, so they were not included. These two regions are also not very susceptible to confidentiality issues.
+
+Where the two data sources were both available, and no CFEC data were confidential, a two-sample t-test was conducted to test that the two data sources were not significantly different. Across regions, the sources are not statistically significantly different (p value &gt; 0.1). A slightly lower p-value exists in the Yukon (p = 0.38), where from 1995-1997 reported harvest values are higher than CFEC data. This is because the reported values include fish harvested for roe, while CFEC data does not. Additionally, the reported Yukon harvest values include Canadian harvest, which is not included in the CFEC data. Since the ADFG reports all source the CFEC for their data, the harvest numbers should not be significantly different between the two sources, other than the noted differences in the Yukon, the differences between the two datasets are not meaningful.
+
+In processing this dataset, where both sources have data, data from the official reports is used instead of the CFEC data. Where CFEC data is used, this dataset includes a column indicating the portion of fisheries within that annual summary by region/species that were confidential, and thus do not contribute to the sum.</para>
+        </description>
+      </methodStep>
+      <methodStep>
+        <description>
+          <para>Sport fish data collection and reformatting:
+Sport fish harvest is estimated by an annual mail survey conducted by ADFG. These surveys are mailed to a stratified random sample of households where at least one person had an Alaska sport fishing license in that year. Harvest data are estimated for each site and species each year by expanding the data according to the methods in Alaska Statewide Sport Fish Harvest Survey, Regional Operational Plan (William Romberg, 2016).
+
+Estimates that were based on fewer than 12 responses were not used in this analysis, based on the recommendation of Mills and Howe (1992). This dataset only uses the point estimate for each harvest value, although standard error, and upper and lower confidence limits are available in the source data.</para>
+        </description>
+      </methodStep>
+    </methods>
+    <project>
+      <title>State of Alaska’s Salmon and People</title>
+      <personnel>
+        <individualName>
+          <givenName>Matt</givenName>
+          <surName>Jones</surName>
+        </individualName>
+        <organizationName>NCEAS/UCSB</organizationName>
+        <role>principalInvestigator</role>
+      </personnel>
+      <personnel>
+        <individualName>
+          <givenName>Ian</givenName>
+          <surName>Dutton</surName>
+        </individualName>
+        <organizationName>Nautilus Impact Investing</organizationName>
+        <role>principalInvestigator</role>
+      </personnel>
+      <personnel>
+        <individualName>
+          <givenName>Frank</givenName>
+          <surName>Davis</surName>
+        </individualName>
+        <organizationName>NCEAS/UCSB</organizationName>
+        <role>principalInvestigator</role>
+      </personnel>
+      <personnel>
+        <individualName>
+          <givenName>Jeanette</givenName>
+          <surName>Clark</surName>
+        </individualName>
+        <organizationName>NCEAS/UCSB</organizationName>
+        <role>dataCoordinator</role>
+      </personnel>
+      <personnel>
+        <individualName>
+          <givenName>Jared</givenName>
+          <surName>Kibele</surName>
+        </individualName>
+        <organizationName>NCEAS/UCSB</organizationName>
+        <role>programmer</role>
+      </personnel>
+      <abstract>
+        <para>State of Alaska’s Salmon and People (SASAP) and SASAP Data Task Force are both funded by the Gordon and Betty Moore Foundation. SASAP is a synthesis science project aimed to create an equitable decision-making platform for all stakeholders by addressing data gaps in Alaska’s salmon system through information synthesis, collaboration and stakeholder engagement. The SASAP Data Task Force assists the synthesis research effort through data collection, homogenization, management, and sustainability, under the direction of the synthesis project leads. The result of the efforts of these two projects is an Alaskan Salmon data catalog, containing all of the original and derived data products resulting from the synthesis research.</para>
+      </abstract>
+      <funding>
+        <para>State of Alaska’s Salmon and People (Gordon and Betty Moore Foundation Award 5124)</para>
+        <para>Data Task Forces for Better Synthesis Studies (Gordon and Betty Moore Foundation Award 5451)</para>
+      </funding>
+    </project>
+    <dataTable id="urn-uuid-84e5a168-9505-4254-9a9f-1f2324ec8e0e" system="uuid">
+      <entityName>Harvest_All_Sectors.csv</entityName>
+      <physical scope="document">
+        <objectName>Harvest_All_Sectors.csv</objectName>
+        <size unit="bytes">332060</size>
+        <authentication method="SHA1">29e95b28d328130e9efc9f463404b30db681d222</authentication>
+        <dataFormat>
+          <externallyDefinedFormat>
+            <formatName>text/csv</formatName>
+          </externallyDefinedFormat>
+        </dataFormat>
+        <distribution scope="document">
+          <online>
+            <url function="download">https://cn.dataone.org/cn/v2/resolve/urn:uuid:2f852663-60e5-4342-b6b9-cd079da97530</url>
+          </online>
+        </distribution>
+      </physical>
+      <attributeList>
+        <attribute id="tu6I7bREn6t0bIgiDTvhTEKX2xsesD">
+          <attributeName>year</attributeName>
+          <attributeLabel>year</attributeLabel>
+          <attributeDefinition>year of salmon harvest</attributeDefinition>
+          <measurementScale>
+            <dateTime>
+              <formatString>YYYY</formatString>
+            </dateTime>
+          </measurementScale>
+        </attribute>
+        <attribute id="asEqX0uyM7J6nscEbdgrPb56ddczpv">
+          <attributeName>SASAP.Region</attributeName>
+          <attributeLabel>SASAP Region</attributeLabel>
+          <attributeDefinition>region in which harvest occurred</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Any text</definition>
+                  <pattern>*</pattern>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute id="RBQttWw2hO481ppJBRwNPspoXm3cAA">
+          <attributeName>species</attributeName>
+          <attributeLabel>species</attributeLabel>
+          <attributeDefinition>species of harvest, using the common name for the 5 species of Pacific salmon (chinook, sockeye, coho, pink, chum)</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Any text</definition>
+                  <pattern>*</pattern>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute id="J2yWNhnbleQDGnseSFC3Ec5bGkHg8E">
+          <attributeName>p_conf</attributeName>
+          <attributeLabel>proportion confidential</attributeLabel>
+          <attributeDefinition>For Commercial data only, if the data are sourced from the CFEC directly, this value represents the portion of fisheries with confidential data </attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>dimensionless</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>no confidential data exist for this sector (personal use, subsistence, sport fish), or they do not exist for the source (report)</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id="lvGuktCgbydVKHm1fsscrr01gTPTGr">
+          <attributeName>sector</attributeName>
+          <attributeLabel>sector</attributeLabel>
+          <attributeDefinition>sector of harvest, where a sector represents a unique permitting system under which a person could harvest salmon. The four sectors are commercial, subsistence, personal use, or sport fish.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Any text</definition>
+                  <pattern>*</pattern>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+        </attribute>
+        <attribute id="pdMqJ1r630Pvp50ge8r3LtlOIkOVnV">
+          <attributeName>source_report</attributeName>
+          <attributeLabel>Source, Report</attributeLabel>
+          <attributeDefinition>For commercial data only, whether the data were obtained from published reports, as opposed to directly from the CFEC.</attributeDefinition>
+          <measurementScale>
+            <nominal>
+              <nonNumericDomain>
+                <textDomain>
+                  <definition>Any text</definition>
+                  <pattern>*</pattern>
+                </textDomain>
+              </nonNumericDomain>
+            </nominal>
+          </measurementScale>
+          <missingValueCode>
+            <code>NA</code>
+            <codeExplanation>data were not obtained from the report data source</codeExplanation>
+          </missingValueCode>
+        </attribute>
+        <attribute id="WGleJscOXG7n2PDfuE8vnEkPIKGgZe">
+          <attributeName>harvest</attributeName>
+          <attributeLabel>harvest</attributeLabel>
+          <attributeDefinition>total harvest of salmon, in number of fish</attributeDefinition>
+          <measurementScale>
+            <ratio>
+              <unit>
+                <standardUnit>number</standardUnit>
+              </unit>
+              <numericDomain>
+                <numberType>real</numberType>
+              </numericDomain>
+            </ratio>
+          </measurementScale>
+        </attribute>
+      </attributeList>
+    </dataTable>
+    <otherEntity id="urn-uuid-bff921d5-8e19-42b6-8a2e-5794646d4a0b">
+      <entityName>All_Harvest.Rmd</entityName>
+      <entityDescription>R Markdown file that gathers and summarizes harvest data from source files</entityDescription>
+      <physical scope="document">
+        <objectName>All_Harvest.Rmd</objectName>
+        <size unit="bytes">12292</size>
+        <authentication method="MD5">2be20ec60698a7a0052ed2c58a79ae82</authentication>
+        <dataFormat>
+          <externallyDefinedFormat>
+            <formatName>application/octet-stream</formatName>
+          </externallyDefinedFormat>
+        </dataFormat>
+        <distribution scope="document">
+          <online>
+            <url function="download">https://cn.dataone.org/cn/v2/resolve/urn:uuid:56abfb14-74ff-482b-a327-dbbf4b629d8b</url>
+          </online>
+        </distribution>
+      </physical>
+      <entityType>application/octet-stream</entityType>
+    </otherEntity>
+  </dataset>
+</eml:eml>

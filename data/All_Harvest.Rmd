@@ -1,0 +1,204 @@
+---
+title: "Harvest by Region, Species, and Sector"
+author: "Jeanette Clark"
+date: "5/23/2018"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, warnings = FALSE, message = FALSE)
+```
+
+```{r}
+library(dplyr)
+library(tidyr)
+library(ggplot2)
+library(grid)
+library(RColorBrewer)
+```
+
+# Datasets
+
+The datasets used in this analysis are:
+
+
+## [Subsistence and Personal Use Harvest](https://knb.ecoinformatics.org/#view/urn:uuid:7e4586c0-9812-4355-8f3b-1445b9a8ca53)
+
+Fishing permits and postseason household surveys are used to assess subsistence salmon harvests in the management areas in Alaska. Fishing permits vary by subdistrict and are returned to the Alaska Department of Fish and Game (ADFG) if not used. Household surveys are conducted by the Division of Commercial Fisheries in certain subdistricts after the end of the season. Postseason surveys are used to estimate subsistence salmon by species and community; compile information on harvest by gear types, participation rates, household size, use of salmon, and participation in customary barter and trade; as well as assess the quality of salmon fishing and what affected it.
+
+Certain subsistence fisheries span multiple SASAP Regions. Cook Inlet and Prince William Sound Educational Permits span two regions. The vast majority of these permits are held by Cook Inlet residents, so this fishery is assigned to Cook Inlet. The Northwest Alaska subsistence fishery encompasses waters located both Norton Sound and Kotzebue. The residency of permitholders in the Northwest Fishery is split between Norton Sound and Kotzebue, with Norton Sound residents taking ~2/3 of the catch in this fishery. A tiny percentage of the catch is taken by residents of other parts of the state. Since both of these regions are remote and rural, it is reasonable to assume that Kotzebue residents mostly fish in Kotzebue, and Norton Sound residents mostly fish in Norton Sound. Thus, the region of origin of the fish was assigned based on the residence of the permit holder for this fishery only. The small percentage of the catch (< 5% annually) caught by residents of other parts of the state is assigned to Norton Sound. With the exception of these two fisheries, the SASAP region is assigned based on the location of the fishery.
+
+    
+## [Commercial Harvest](https://knb.ecoinformatics.org/#view/urn:uuid:40473bde-9774-4581-aafb-5d2c3b4a70d1)
+
+Two sources are used for Commercial Harvest data. One dataset comes directly from the Commercial Fisheries Entry Commision (CFEC), and shows harvest at the district level, by species and gear type. The CFEC data is derived from individual fish tickets. In this dataset, commercial data with fewer than 3 people, permits, or processors in a fishery are confidental and thus not shown.
+
+A second data source, the official [ADFG Annual Management Reports](https://knb.ecoinformatics.org/#view/urn:uuid:31b421f3-c48c-473a-bc20-601c738b3a3c), was incorporated where possible. These reports have data for commercial catch by species at the management area level. For various reasons, these data are far less susceptible to confidentiality issues, and thus in some regions can fill in considerable gaps left by the CFEC data. ADFG management report data was compiled for all regions except Prince William Sound, Southeast, and Arctic. The Arctic does not have any active commercial fisheries, so it was not included. Prince William Sound and Southeast management reports have difficult structures that made it difficult to extract data in the same way as the CFEC data, so they were not included. These two regions are also not very susceptible to confidentiality issues.
+
+Where the two data sources were both available, and no CFEC data were confidential, a two-sample t-test was conducted to test that the two data sources were not significantly different. Across regions, the sources are not significantly different. A slightly lower p-value exists in the Yukon, where from 1995-1997 reported harvest values are higher than CFEC data because the reported values include fish harvested for roe, while CFEC data does not. Additionally, the reported Yukon harvest values include Canadian harvest, which is not included in the CFEC data.
+
+Since the ADFG reports all source the CFEC for their data, the harvest numbers should not be significantly different between the two sources, other than the noted differences in the Yukon, the differences between the two datasets are not meaningful.
+
+|                                      |   p-value|
+|:-------------------------------------|---------:|
+|Alaska Peninsula and Aleutian Islands | 0.9817614|
+|Copper River                          | 0.9968430|
+|Kodiak                                | 0.8867265|
+|Kotzebue                              | 0.9669972|
+|Kuskokwim                             | 0.9345723|
+|Norton Sound                          | 0.9179088|
+|Chignik                               | 0.9845932|
+|Cook Inlet                            | 0.9620520|
+|Yukon                                 | 0.3776158|
+|Bristol Bay                           | 0.9849001|
+
+
+Because the report data are more complete for this time period, and there is no difference between the two datasets, data sourced from ADFG reports is used instead of CFEC data where available. If CFEC data was used, where more than 50% of the commercial fisheries in a year had confidential data due to lack of processors, and not people/permits, a light gray bar is shown in the plots below. This criteria was chosen because although there is no way of knowing how much of the total harvest is represented in the confidential data, data that are confidential due to lack of people/permits are likely to represent a small fishery, whereas data that are confidential due to a lack of processors could represent a very large fishery.
+
+## [Sportfish Harvest](https://knb.ecoinformatics.org/#view/urn:uuid:6a6a530f-3660-424f-adab-c771d1c89a5d)
+
+Sport fish harvest is estimated by an annual mail survey conducted by ADFG. These surveys are mailed to a stratified random sample of households where at least one person had an Alaska sport fishing license in that year. Harvest data are estimated for each site and species each year by expanding the data according to the methods in [Alaska Statewide Sport Fish Harvest Suvey, Regional Operational Plan](https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3Ad64e5f8b-c91c-487a-8ce7-0cd271194f34).
+
+Estimates that were based on fewer than 12 responses were not used in this analysis, based on the recommendation of [Mills and Howe (1992)](https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3Abb01b2c8-5e6c-4645-903d-39dbdd8d4d56). This dataset only uses the point estimate for each harvest value, although standard error, and upper and lower confidence limits are available.
+
+# Figures
+
+These plots show the harvest in thousands of fish by sector, species and region. Region indicates where the fish were caught.
+
+
+
+
+```{r}
+sport <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3A22ef5022-8ade-4549-acac-c18656dd2033", stringsAsFactors = F)
+
+s <- sport %>% 
+    filter(TYPE == "0-EST") %>% 
+    rename(SASAP.Region = region_name) %>% 
+    mutate(SASAP.Region = ifelse(SASAP.Region == "Aleutian Islands", "Alaska Peninsula and Aleutian Islands", SASAP.Region)) %>% 
+    filter(num_responses > 12 | is.na(num_responses) == T) %>% 
+    group_by(year, SASAP.Region, species) %>% 
+    summarize(harvest = sum(harvest, na.rm = T)) %>% 
+    mutate(Sector = "Sport Fish")
+    
+```
+
+
+```{r}
+#* [Earnings by Community of Residence](https://knb.ecoinformatics.org/#view/urn:uuid:75de1e74-bf52-41fa-a120-0570736563f5)
+com <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3A6619074a-3037-41a6-8dbf-9bf2988cabec", stringsAsFactors = F)
+
+c <- com %>% 
+    rename(year = YEAR, species = Species) %>% 
+    mutate(SASAP.Region = ifelse(SASAP.Region == "Aleutian Islands", "Alaska Peninsula and Aleutian Islands", SASAP.Region)) %>%
+    group_by(year, SASAP.Region, species) %>% 
+    summarise(harvest = sum(No_of_Fish, na.rm = T), p_conf = round(length(which(CONFIDENTIAL == "CONFIDENTIAL" & people_count > 3 &  permit_count > 3 & processor_count < 3))/length(CONFIDENTIAL), digits = 2)) %>% 
+    drop_na() %>% 
+    mutate(Sector = "Commercial") %>% 
+    mutate(draw = ifelse(p_conf >= 0.5, 0.25, NA))
+
+#read in report data
+
+c_r <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3Ad379f99f-f4ea-4dfa-9cd8-bb523248b8c1", stringsAsFactors = F) %>% 
+    mutate(Source = "Report") %>% 
+    rename(harvest_report = harvest)
+#join report data to CFEC data, if report data exsits replace harvest data with that, drop the rest of the columns
+
+c <- left_join(c, c_r) %>% 
+    mutate(harvest_new = ifelse(is.na(Source), harvest, harvest_report)) %>% 
+    mutate(draw = ifelse(is.na(Source), draw, NA)) %>% 
+    mutate(p_conf = ifelse(is.na(Source), p_conf, NA)) %>% 
+    select(-harvest_report, -harvest) %>% 
+    rename(harvest = harvest_new)
+```
+
+
+
+
+```{r}
+sub <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3A9266a118-78b3-48e3-a675-b3dfcc5d0fc4", stringsAsFactors = F)
+
+fisheries <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3A370651b2-2b5b-4b5f-a80a-a55d8f44421b", stringsAsFactors = F)
+sub <- left_join(sub, fisheries, by = c("fisheryName" = "FisheryName"))
+
+```
+
+```{r, eval = F}
+#splitting up Kotzebue and Norton Sound
+#region of residence in the Northwest Alaska Fishery is made up by majority Kotzebue and Norton Sound residents.
+#in these remote areas, we assume that residents are fishing for subsistence within their home region, and assign the SASAP.Region_Fish to the region of residence 
+
+#plot to view region of residence in the Northwest Alaska fishery
+nw <- filter(sub, fisheryName == "Northwest Alaska") %>% 
+    group_by(year, region) %>% 
+    summarise(harvest = sum(amount, na.rm = T))
+
+
+ggplot(nw, aes(x = year, y = harvest, fill = region)) +
+    geom_bar(stat = "identity")
+
+```
+
+```{r}
+
+sub <- sub %>% 
+    rename(SASAP.Region = region)
+#assign Kotzebue to fishery locations for rows where resident is from Kotzebue and fishery is Northwest Alaska
+#assign Norton Sound otherwise
+sub$SASAP.Region_Fish[which(sub$fisheryName == "Northwest Alaska" & sub$SASAP.Region == "Kotzebue")] <- "Kotzebue"
+
+pu_permits <- c("Personal Use", "Required (PU)")
+sub_permits <- c("Subsistence", "Required (S)", "Not Required (S)", "Commercial", "Test Fishery", "Education", "Combined")
+    
+    
+sb <- sub %>% 
+    select(-SASAP.Region) %>% 
+    rename(SASAP.Region = SASAP.Region_Fish) %>% 
+    mutate(species = tolower(species)) %>% 
+    mutate(SASAP.Region = ifelse(SASAP.Region == "Aleutian Islands", "Alaska Peninsula and Aleutian Islands", SASAP.Region)) %>%
+    mutate(Sector = ifelse(permitTypeName %in% pu_permits, "Personal Use", "Subsistence")) %>% 
+    group_by(year, SASAP.Region, species, Sector) %>% 
+    summarize(harvest = sum(amount, na.rm = T))
+    
+
+
+   # mutate(Sector = "Subsistence/Personal Use")
+```
+
+```{r}
+h <- rbind(c, s, sb)
+```
+
+
+```{r, message = F, warning = F, eval = T, fig.width=8, fig.height=10}
+
+reg <- unique(h$SASAP.Region)
+reg <- subset(reg, is.na(reg) == F)
+
+colourCount = length(unique(h$Sector))
+getPalette = colorRampPalette(brewer.pal(colourCount, "Dark2"))
+pal <- getPalette(colourCount)
+names(pal) <- unique(h$Sector)
+
+for (i in 1:length(reg)){
+       p <- suppressWarnings(ggplot(filter(h, SASAP.Region == reg[i])) +
+        geom_bar(aes(x = year, y = draw*Inf), alpha = 0.3, stat = "identity") +
+        geom_bar(aes(x = year, y = harvest/1000, fill = Sector), stat = "identity") +
+        scale_fill_manual(values = pal, drop = F) +
+        facet_wrap(~species, ncol = 1, scales = "free_y", drop = F) +
+        xlim(1995, 2017) +
+        ylab("Harvest (thousands of fish)") +
+        xlab("Year") +
+        ggtitle(reg[i])) +
+        theme_minimal(base_size = 14) +
+        theme(panel.grid.minor = element_blank(), legend.position = "bottom")
+suppressWarnings(print(p))
+}
+```
+
+```{r}
+h <- select(h, -draw) %>% rename(sector = Sector, source_report = Source)
+#write.csv(h, "~/Desktop/Harvest_All_Sectors.csv", row.names = F)
+```
+
+
+
