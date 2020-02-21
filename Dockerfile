@@ -12,10 +12,15 @@ RUN echo '***** Update packages *****'                                      \
     && echo '***** Install command-line utility packages *****'             \
     && apt -y install sudo man less file tree procps
 
-RUN echo '***** Create the wt user *****'                                   \
-    && useradd wt --gid sudo                                                \
+RUN sudo userdel rstudio
+
+RUN echo '***** Create the wt group and user *****'                         \
+    && groupadd wt --gid 1000                                               \
+    && useradd wt --uid 1000                                                \
+                  --gid 1000                                                \
                   --shell /bin/bash                                         \
                   --create-home                                             \
+                  --password `echo wt | makepasswd --crypt-md5 --clearfrom - | cut -b5-`     \
     && echo "wt ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/wt                \
     && chmod 0440 /etc/sudoers.d/wt
 
@@ -24,8 +29,6 @@ USER  wt
 WORKDIR $HOME
 
 RUN echo 'setwd("/mnt/all-harvest-rippo")' >> .Rprofile
-RUN echo 'sudo rstudio-server start' >> start_rstudio.sh
-
 
 RUN echo 'export IN_RUNNING_RIPPO=wt-prov-model' >> .bashrc
 RUN echo 'PATH=/home/wt/bin:$PATH' >> .bashrc

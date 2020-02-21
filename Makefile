@@ -9,7 +9,7 @@ TAGGED_IMAGE=${IMAGE_ORG}/${IMAGE_NAME}:${IMAGE_TAG}
 
 ADD_CAPS=SYS_PTRACE
 REPO_DIR=/mnt/all-harvest-rippo
-RUN_IMAGE=docker run -it -p 8787:8787 -e PASSWORD=foo                            \
+RUN_IMAGE=docker run -it -p 8787:8787                \
                      --volume $(CURDIR):$(REPO_DIR)  \
                      --cap-add=$(ADD_CAPS)           \
                      $(TAGGED_IMAGE)
@@ -53,7 +53,7 @@ ifndef IN_RUNNING_RIPPO
 start:
 	$(RUN_IMAGE)
 
-build-image:
+image:
 	docker build -t ${TAGGED_IMAGE} .
 
 push-image:
