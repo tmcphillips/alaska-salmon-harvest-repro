@@ -30,6 +30,10 @@ else
 	@sed -ne '/@sed/!s/#\# //p' $(MAKEFILE_LIST)
 endif
 
+clean:                  ## Delete all products of the analysis.
+	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR)/analysis clean'
+
+
 rstudio:                ## Start RStudio Server and load the All_Harvest project.
 ifdef IN_RUNNING_RIPPO
 	@sudo rstudio-server start

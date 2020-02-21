@@ -200,7 +200,7 @@ suppressWarnings(print(p))
 
 ```{r}
 h <- select(h, -draw) %>% rename(sector = Sector, source_report = Source)
-#write.csv(h, "~/Desktop/Harvest_All_Sectors.csv", row.names = F)
+write.csv(h, "outputs/Harvest_All_Sectors.csv", row.names = F)
 ```
 
 
