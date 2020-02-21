@@ -23,16 +23,18 @@ endif
 ##        Make targets available both INSIDE and OUTSIDE a running RIPPO
 ## 
 
-help:                   ## Show this help.
+help:                  ## Show this help.
 ifdef PWSH
 	@${PWSH} "Select-String -Path $(MAKEFILE_LIST) -Pattern '#\# ' | % {$$_.Line.replace('##','')}"
 else
 	@sed -ne '/@sed/!s/#\# //p' $(MAKEFILE_LIST)
 endif
 
+run:                    ## Run analysis and render R Markdown.
+	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR)/analysis run'
+
 clean:                  ## Delete all products of the analysis.
 	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR)/analysis clean'
-
 
 rstudio:                ## Start RStudio Server and load the All_Harvest project.
 ifdef IN_RUNNING_RIPPO
