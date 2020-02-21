@@ -28,10 +28,12 @@ ENV HOME /home/wt
 USER  wt
 WORKDIR $HOME
 
-RUN echo 'setwd("/mnt/all-harvest-rippo")' >> .Rprofile
+COPY --chown=1000:1000 .rstudio .rstudio
+
+RUN echo 'setwd("/mnt/all-harvest-rippo/analysis")' >> .Rprofile
+#RUN echo 'rstudioapi::navigateToFile("/mnt/all-harvest-rippo/analysis/All_Harvest.rmd")' >> .Rprofile
 
 RUN echo 'export IN_RUNNING_RIPPO=wt-prov-model' >> .bashrc
-RUN echo 'PATH=/home/wt/bin:$PATH' >> .bashrc
 RUN echo 'cd /mnt/all-harvest-rippo' >> .bashrc
 
 CMD  /bin/bash -il

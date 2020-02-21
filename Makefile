@@ -31,10 +31,10 @@ else
 	@sed -ne '/@sed/!s/#\# //p' $(MAKEFILE_LIST)
 endif
 
-# run:                    # Run the entire workflow.
+# run:                  ## Run the entire workflow.
 # 	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR)/examples all'
 
-# clean:                  ## Delete all products of the workflow.
+# clean:                ## Delete all products of the workflow.
 # 	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR)/examples clean'
 
 start-rstudio:          ## Start the RStudio server

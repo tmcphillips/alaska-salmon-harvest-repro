@@ -1,0 +1,9 @@
+{
+    "path" : "/mnt/all-harvest-rippo/analysis",
+    "sortOrder" : [
+        {
+            "ascending" : true,
+            "columnIndex" : 2
+        }
+    ]
+}
