@@ -9,7 +9,7 @@ TAGGED_IMAGE=${IMAGE_ORG}/${IMAGE_NAME}:${IMAGE_TAG}
 
 ADD_CAPS=SYS_PTRACE
 REPO_DIR=/mnt/all-harvest-rippo
-RUN_IMAGE=docker run -it                             \
+RUN_IMAGE=docker run -it -p 8787:8787 -e PASSWORD=foo                            \
                      --volume $(CURDIR):$(REPO_DIR)  \
                      --cap-add=$(ADD_CAPS)           \
                      $(TAGGED_IMAGE)
@@ -31,11 +31,20 @@ else
 	@sed -ne '/@sed/!s/#\# //p' $(MAKEFILE_LIST)
 endif
 
-# run:                    ## Run the entire workflow.
+# run:                    # Run the entire workflow.
 # 	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR)/examples all'
 
 # clean:                  ## Delete all products of the workflow.
 # 	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR)/examples clean'
+
+start-rstudio:          ## Start the RStudio server
+ifdef IN_RUNNING_RIPPO
+	sudo rstudio-server start
+	tail -f /var/log/lastlog
+else
+	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR) start-rstudio'
+endif
+
 
 ## 
 ## *** Make targets that work only OUTSIDE a running RIPPO ***
