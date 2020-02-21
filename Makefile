@@ -40,11 +40,9 @@ endif
 start-rstudio:          ## Start the RStudio server
 ifdef IN_RUNNING_RIPPO
 	sudo rstudio-server start
-	tail -f /var/log/lastlog
 else
-	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR) start-rstudio'
+	$(RUN_IN_IMAGE) 'make start-rstudio; bash -il'
 endif
-
 
 ## 
 ## *** Make targets that work only OUTSIDE a running RIPPO ***

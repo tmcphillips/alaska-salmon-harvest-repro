@@ -19,7 +19,6 @@ RUN echo '***** Create the wt user *****'                                   \
     && echo "wt ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/wt                \
     && chmod 0440 /etc/sudoers.d/wt
 
-
 ENV HOME /home/wt
 USER  wt
 WORKDIR $HOME
@@ -28,9 +27,8 @@ RUN echo 'setwd("/mnt/all-harvest-rippo")' >> .Rprofile
 RUN echo 'sudo rstudio-server start' >> start_rstudio.sh
 
 
-RUN echo 'cd /mnt/all-harvest-rippo' >> .bashrc
 RUN echo 'export IN_RUNNING_RIPPO=wt-prov-model' >> .bashrc
 RUN echo 'PATH=/home/wt/bin:$PATH' >> .bashrc
+RUN echo 'cd /mnt/all-harvest-rippo' >> .bashrc
 
-# CMD  sudo rstudio-server start
 CMD  /bin/bash -il
