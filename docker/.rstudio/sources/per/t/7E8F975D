@@ -1,17 +1,19 @@
 {
     "collab_server" : "",
     "contents" : "",
-    "created" : 1582256662949.000,
+    "created" : 1583043641596.000,
     "dirty" : false,
     "encoding" : "UTF-8",
     "folds" : "",
-    "hash" : "884548991",
-    "id" : "2474454B",
-    "lastKnownWriteTime" : 1582180177,
-    "last_content_update" : 1582180177,
-    "path" : "/mnt/all-harvest-rippo/analysis/All_Harvest.Rmd",
+    "hash" : "3519947593",
+    "id" : "7E8F975D",
+    "lastKnownWriteTime" : 1583021853,
+    "last_content_update" : 1583021853,
+    "path" : "/mnt/all-harvest-repro/analysis/All_Harvest.Rmd",
     "project_path" : null,
     "properties" : {
+        "cursorPosition" : "11,43",
+        "scrollLine" : "0"
     },
     "read_only" : false,
     "read_only_alternatives" : [

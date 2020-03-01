@@ -2,7 +2,10 @@
 title: "Harvest by Region, Species, and Sector"
 author: "Jeanette Clark"
 date: "5/23/2018"
-output: html_document
+output:
+  html_document: default
+  pdf_document: default
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -28,7 +31,7 @@ Fishing permits and postseason household surveys are used to assess subsistence 
 
 Certain subsistence fisheries span multiple SASAP Regions. Cook Inlet and Prince William Sound Educational Permits span two regions. The vast majority of these permits are held by Cook Inlet residents, so this fishery is assigned to Cook Inlet. The Northwest Alaska subsistence fishery encompasses waters located both Norton Sound and Kotzebue. The residency of permitholders in the Northwest Fishery is split between Norton Sound and Kotzebue, with Norton Sound residents taking ~2/3 of the catch in this fishery. A tiny percentage of the catch is taken by residents of other parts of the state. Since both of these regions are remote and rural, it is reasonable to assume that Kotzebue residents mostly fish in Kotzebue, and Norton Sound residents mostly fish in Norton Sound. Thus, the region of origin of the fish was assigned based on the residence of the permit holder for this fishery only. The small percentage of the catch (< 5% annually) caught by residents of other parts of the state is assigned to Norton Sound. With the exception of these two fisheries, the SASAP region is assigned based on the location of the fishery.
 
-    
+
 ## [Commercial Harvest](https://knb.ecoinformatics.org/#view/urn:uuid:40473bde-9774-4581-aafb-5d2c3b4a70d1)
 
 Two sources are used for Commercial Harvest data. One dataset comes directly from the Commercial Fisheries Entry Commision (CFEC), and shows harvest at the district level, by species and gear type. The CFEC data is derived from individual fish tickets. In this dataset, commercial data with fewer than 3 people, permits, or processors in a fishery are confidental and thus not shown.
@@ -71,15 +74,15 @@ These plots show the harvest in thousands of fish by sector, species and region.
 ```{r}
 sport <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3A22ef5022-8ade-4549-acac-c18656dd2033", stringsAsFactors = F)
 
-s <- sport %>% 
-    filter(TYPE == "0-EST") %>% 
-    rename(SASAP.Region = region_name) %>% 
-    mutate(SASAP.Region = ifelse(SASAP.Region == "Aleutian Islands", "Alaska Peninsula and Aleutian Islands", SASAP.Region)) %>% 
-    filter(num_responses > 12 | is.na(num_responses) == T) %>% 
-    group_by(year, SASAP.Region, species) %>% 
-    summarize(harvest = sum(harvest, na.rm = T)) %>% 
+s <- sport %>%
+    filter(TYPE == "0-EST") %>%
+    rename(SASAP.Region = region_name) %>%
+    mutate(SASAP.Region = ifelse(SASAP.Region == "Aleutian Islands", "Alaska Peninsula and Aleutian Islands", SASAP.Region)) %>%
+    filter(num_responses > 12 | is.na(num_responses) == T) %>%
+    group_by(year, SASAP.Region, species) %>%
+    summarize(harvest = sum(harvest, na.rm = T)) %>%
     mutate(Sector = "Sport Fish")
-    
+
 ```
 
 
@@ -87,27 +90,27 @@ s <- sport %>%
 #* [Earnings by Community of Residence](https://knb.ecoinformatics.org/#view/urn:uuid:75de1e74-bf52-41fa-a120-0570736563f5)
 com <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3A6619074a-3037-41a6-8dbf-9bf2988cabec", stringsAsFactors = F)
 
-c <- com %>% 
-    rename(year = YEAR, species = Species) %>% 
+c <- com %>%
+    rename(year = YEAR, species = Species) %>%
     mutate(SASAP.Region = ifelse(SASAP.Region == "Aleutian Islands", "Alaska Peninsula and Aleutian Islands", SASAP.Region)) %>%
-    group_by(year, SASAP.Region, species) %>% 
-    summarise(harvest = sum(No_of_Fish, na.rm = T), p_conf = round(length(which(CONFIDENTIAL == "CONFIDENTIAL" & people_count > 3 &  permit_count > 3 & processor_count < 3))/length(CONFIDENTIAL), digits = 2)) %>% 
-    drop_na() %>% 
-    mutate(Sector = "Commercial") %>% 
+    group_by(year, SASAP.Region, species) %>%
+    summarise(harvest = sum(No_of_Fish, na.rm = T), p_conf = round(length(which(CONFIDENTIAL == "CONFIDENTIAL" & people_count > 3 &  permit_count > 3 & processor_count < 3))/length(CONFIDENTIAL), digits = 2)) %>%
+    drop_na() %>%
+    mutate(Sector = "Commercial") %>%
     mutate(draw = ifelse(p_conf >= 0.5, 0.25, NA))
 
 #read in report data
 
-c_r <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3Ad379f99f-f4ea-4dfa-9cd8-bb523248b8c1", stringsAsFactors = F) %>% 
-    mutate(Source = "Report") %>% 
+c_r <- read.csv("https://knb.ecoinformatics.org/knb/d1/mn/v2/object/urn%3Auuid%3Ad379f99f-f4ea-4dfa-9cd8-bb523248b8c1", stringsAsFactors = F) %>%
+    mutate(Source = "Report") %>%
     rename(harvest_report = harvest)
 #join report data to CFEC data, if report data exsits replace harvest data with that, drop the rest of the columns
 
-c <- left_join(c, c_r) %>% 
-    mutate(harvest_new = ifelse(is.na(Source), harvest, harvest_report)) %>% 
-    mutate(draw = ifelse(is.na(Source), draw, NA)) %>% 
-    mutate(p_conf = ifelse(is.na(Source), p_conf, NA)) %>% 
-    select(-harvest_report, -harvest) %>% 
+c <- left_join(c, c_r) %>%
+    mutate(harvest_new = ifelse(is.na(Source), harvest, harvest_report)) %>%
+    mutate(draw = ifelse(is.na(Source), draw, NA)) %>%
+    mutate(p_conf = ifelse(is.na(Source), p_conf, NA)) %>%
+    select(-harvest_report, -harvest) %>%
     rename(harvest = harvest_new)
 ```
 
@@ -125,11 +128,11 @@ sub <- left_join(sub, fisheries, by = c("fisheryName" = "FisheryName"))
 ```{r, eval = F}
 #splitting up Kotzebue and Norton Sound
 #region of residence in the Northwest Alaska Fishery is made up by majority Kotzebue and Norton Sound residents.
-#in these remote areas, we assume that residents are fishing for subsistence within their home region, and assign the SASAP.Region_Fish to the region of residence 
+#in these remote areas, we assume that residents are fishing for subsistence within their home region, and assign the SASAP.Region_Fish to the region of residence
 
 #plot to view region of residence in the Northwest Alaska fishery
-nw <- filter(sub, fisheryName == "Northwest Alaska") %>% 
-    group_by(year, region) %>% 
+nw <- filter(sub, fisheryName == "Northwest Alaska") %>%
+    group_by(year, region) %>%
     summarise(harvest = sum(amount, na.rm = T))
 
 
@@ -140,7 +143,7 @@ ggplot(nw, aes(x = year, y = harvest, fill = region)) +
 
 ```{r}
 
-sub <- sub %>% 
+sub <- sub %>%
     rename(SASAP.Region = region)
 #assign Kotzebue to fishery locations for rows where resident is from Kotzebue and fishery is Northwest Alaska
 #assign Norton Sound otherwise
@@ -148,17 +151,17 @@ sub$SASAP.Region_Fish[which(sub$fisheryName == "Northwest Alaska" & sub$SASAP.Re
 
 pu_permits <- c("Personal Use", "Required (PU)")
 sub_permits <- c("Subsistence", "Required (S)", "Not Required (S)", "Commercial", "Test Fishery", "Education", "Combined")
-    
-    
-sb <- sub %>% 
-    select(-SASAP.Region) %>% 
-    rename(SASAP.Region = SASAP.Region_Fish) %>% 
-    mutate(species = tolower(species)) %>% 
+
+
+sb <- sub %>%
+    select(-SASAP.Region) %>%
+    rename(SASAP.Region = SASAP.Region_Fish) %>%
+    mutate(species = tolower(species)) %>%
     mutate(SASAP.Region = ifelse(SASAP.Region == "Aleutian Islands", "Alaska Peninsula and Aleutian Islands", SASAP.Region)) %>%
-    mutate(Sector = ifelse(permitTypeName %in% pu_permits, "Personal Use", "Subsistence")) %>% 
-    group_by(year, SASAP.Region, species, Sector) %>% 
+    mutate(Sector = ifelse(permitTypeName %in% pu_permits, "Personal Use", "Subsistence")) %>%
+    group_by(year, SASAP.Region, species, Sector) %>%
     summarize(harvest = sum(amount, na.rm = T))
-    
+
 
 
    # mutate(Sector = "Subsistence/Personal Use")
@@ -197,7 +200,7 @@ suppressWarnings(print(p))
 
 ```{r}
 h <- select(h, -draw) %>% rename(sector = Sector, source_report = Source)
-#write.csv(h, "~/Desktop/Harvest_All_Sectors.csv", row.names = F)
+write.csv(h, "Harvest_All_Sectors.csv", row.names = F)
 ```
 
 

@@ -1,0 +1,15 @@
+]0;/mnt/all-harvest-repro]0;repro@14049cdfbd3e: /mnt/all-harvest-repro[01;32mrepro@14049cdfbd3e[00m:[01;34m/mnt/all-harvest-repro[00m$ [K]0;repro@14049cdfbd3e: /mnt/all-harvest-repro[01;32mrepro@14049cdfbd3e[00m:[01;34m/mnt/all-harvest-repro[00m$ git status
+On branch master
+Your branch is up to date with 'origin/master'.
+
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git checkout -- <file>..." to discard changes in working directory)
+
+	[31mmodified:   Dockerfile[m
+	[31mmodified:   Makefile[m
+	[31mmodified:   README.md[m
+	[31mmodified:   analysis/All_Harvest.Rproj[m
+
+no changes added to commit (use "git add" and/or "git commit -a")
+]0;/mnt/all-harvest-repro]0;repro@14049cdfbd3e: /mnt/all-harvest-repro[01;32mrepro@14049cdfbd3e[00m:[01;34m/mnt/all-harvest-repro[00m$ 

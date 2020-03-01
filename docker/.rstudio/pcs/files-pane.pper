@@ -1,5 +1,5 @@
 {
-    "path" : "/mnt/all-harvest-rippo/analysis",
+    "path" : "/mnt/all-harvest-repro/analysis",
     "sortOrder" : [
         {
             "ascending" : true,

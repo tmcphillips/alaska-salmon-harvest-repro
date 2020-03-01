@@ -3,27 +3,27 @@ PWSH=powershell -noprofile -command
 endif
 
 IMAGE_ORG=tmcphillips
-IMAGE_NAME=all-harvest-rippo
+IMAGE_NAME=all-harvest-repro
 IMAGE_TAG=latest
 TAGGED_IMAGE=${IMAGE_ORG}/${IMAGE_NAME}:${IMAGE_TAG}
 
-REPO_DIR=/mnt/all-harvest-rippo
-RUN_IMAGE=docker run -it --rm -p 8787:8787           \
-                     --volume $(CURDIR):$(REPO_DIR)  \
+REPRO_DIR=/mnt/all-harvest-repro
+RUN_REPRO=docker run -it --rm -p 8787:8787           \
+                     --volume $(CURDIR):$(REPRO_DIR)  \
                      $(TAGGED_IMAGE)
 
-ifdef IN_RUNNING_RIPPO
-RUN_IN_IMAGE=bash -ic
+ifdef IN_RUNNING_REPRO
+RUN_IN_REPRO=bash -ic
 else
-RUN_IN_IMAGE=$(RUN_IMAGE) bash -ic
+RUN_IN_REPRO=$(RUN_REPRO) bash -ic
 endif
 
 ## 
 ## ------------------------------------------------------------------------------
-##        Make targets available both INSIDE and OUTSIDE a running RIPPO
+##        Make targets available both INSIDE and OUTSIDE a running REPRO
 ## 
 
-help:                  ## Show this help.
+help:                   ## Show this help.
 ifdef PWSH
 	@${PWSH} "Select-String -Path $(MAKEFILE_LIST) -Pattern '#\# ' | % {$$_.Line.replace('##','')}"
 else
@@ -31,32 +31,35 @@ else
 endif
 
 run:                    ## Run analysis and render R Markdown.
-	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR)/analysis run'
+	$(RUN_IN_REPRO) 'make -C $(REPRO_DIR)/analysis run'
 
 clean:                  ## Delete all products of the analysis.
-	$(RUN_IN_IMAGE) 'make -C $(REPO_DIR)/analysis clean'
+	$(RUN_IN_REPRO) 'make -C $(REPRO_DIR)/analysis clean'
 
 rstudio:                ## Start RStudio Server and load the All_Harvest project.
-ifdef IN_RUNNING_RIPPO
+ifdef IN_RUNNING_REPRO
 	@sudo rstudio-server start
 	@echo "\n--------------------------------------------------------------------------"
-	@echo   " Open a web browser to http://localhost:8787 (Username: wt, Password: wt)"
+	@echo   "The RStudio Server is now running.  Connect to it by navigating in your"
+	@echo   "web browser to http://localhost:8787 (Username: repro, Password: repro)"
+	@echo
+	@echo   "Exit from this terminal session to shut down RStudio Server."
 	@echo   "--------------------------------------------------------------------------\n"
 else
-	@$(RUN_IN_IMAGE) 'make rstudio; bash -il'
+	@$(RUN_IN_REPRO) 'make rstudio; bash -il'
 endif
 
 ## ------------------------------------------------------------------------------
-##            Make targets available only OUTSIDE a running RIPPO
+##            Make targets available only OUTSIDE a running REPRO
 ## 
 
 
-ifndef IN_RUNNING_RIPPO
+ifndef IN_RUNNING_REPRO
 
 start:                  ## Start a bash session in a new Docker container.
-	$(RUN_IMAGE)
+	$(RUN_REPRO)
 
-image:                  ## Build the Docker image.
+image:                  ## Build the Docker image used to run this REPRO.
 	docker build -t ${TAGGED_IMAGE} .
 
 pull-image:             ## Pull the Docker image from Docker Hub.
