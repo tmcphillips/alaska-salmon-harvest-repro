@@ -1,8 +1,8 @@
 # all_harvest_repro
 
-This repo allows the analysis associated with the dataset with identifier [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The analysis can be run either via the `run` Make target at the command line, or interactively in an RStudio instance running in a container started using the `start` Make target.  The Makefile includes targets for building the Docker image that contains all software dependencies.
+This repo allows the analysis associated with the dataset with identifier [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The analysis can be run either noninteractively via the *`run`* Make target at the command line, or interactively in an RStudio instance running in a container started using the *`start`* Make target. The Makefile includes targets for building the Docker image that contains all software dependencies.
 
-### Tutorial
+### Tutorial 1 - Rerunning the analysis noninteractiely at the command line
 
 1. Ensure that Git, Docker, and GNU Make are installed on your MacOS, Linux or Windows computer:
 
@@ -22,13 +22,25 @@ This repo allows the analysis associated with the dataset with identifier [doi:1
 	There is NO WARRANTY, to the extent permitted by law.
 	```
 
-2. Clone this Git repo.
+2. Clone this Git repo:
 
 	```
 	$ git clone https://github.com/tmcphillips/all-harvest-repro.git
 	```
 
-3. Confirm that the contents of the repo have not changed since it was cloned.
+	List the contents of the `analysis` subdirectory:
+
+	```
+	all-harvest-repro$ ls -l analysis/
+	total 2412
+	-rw-r--r-- 1 tmcphill tmcphill 2116643 Mar 24 15:49 All_Harvest.html
+	-rw-r--r-- 1 tmcphill tmcphill   12338 Mar 24 15:49 All_Harvest.Rmd
+	-rwxr-xr-x 1 tmcphill tmcphill     226 Mar 24 15:49 All_Harvest.Rproj
+	-rw-r--r-- 1 tmcphill tmcphill  332060 Mar 24 15:49 Harvest_All_Sectors.csv
+	-rw-r--r-- 1 tmcphill tmcphill     139 Mar 24 15:49 Makefile
+	```
+
+	And use *`git status`* to confirm that the contents of the repo have not changed since it was cloned.
 
 	```
 	all-harvest-repro$ git status
@@ -37,7 +49,7 @@ This repo allows the analysis associated with the dataset with identifier [doi:1
 	nothing to commit, working tree clean
 	```
 
-4. Delete the products of the analysis using the `clean` Make target:
+3. Delete the products of the analysis using the *`clean`* Make target:
 
 	```
 	tmcphill@circe:~/GitRepos/all-harvest-repro$ make clean
@@ -48,7 +60,17 @@ This repo allows the analysis associated with the dataset with identifier [doi:1
 	make: Leaving directory '/mnt/all-harvest-repro/analysis'
 	```
 
-5. Note that the two outputs of the analysis have been deleted:
+	List the `analysis` directory again, noting that the files `All_Harvest.html` and `Harvest_All_Sectors.csv` are no longer present:
+
+	```
+	tmcphill@circe:~/GitRepos/all-harvest-repro$ ls -l analysis/
+	total 16
+	-rw-r--r-- 1 tmcphill tmcphill 12338 Mar 24 15:49 All_Harvest.Rmd
+	-rwxr-xr-x 1 tmcphill tmcphill   226 Mar 24 15:49 All_Harvest.Rproj
+	-rw-r--r-- 1 tmcphill tmcphill   139 Mar 24 15:49 Makefile
+	```
+
+	And note that *`git status`* confirms the two outputs of the analysis have been deleted:
 
 	```
 	all-harvest-repro$ git status
@@ -64,7 +86,7 @@ This repo allows the analysis associated with the dataset with identifier [doi:1
 	no changes added to commit (use "git add" and/or "git commit -a")
 	```
 
-6. Run the analysis using the `run` Make target:
+4. Execute the analysis using the *`run`* Make target:
 
 	```
 	tmcphill@circe:~/GitRepos/all-harvest-repro$ make run
@@ -185,7 +207,19 @@ This repo allows the analysis associated with the dataset with identifier [doi:1
 	make: Leaving directory '/mnt/all-harvest-repro/analysis'
 	```
 
-7. Confirm that the files deleted using the `clean` Make target have been restored and that the repo is now in its initial state.
+5. Confirm that the files deleted using the *`clean`* Make target have been restored:
+
+	```
+	all-harvest-repro$ ls -l analysis/
+	total 2412
+	-rw-r--r-- 1 tmcphill tmcphill 2116643 Mar 24 15:58 All_Harvest.html
+	-rw-r--r-- 1 tmcphill tmcphill   12338 Mar 24 15:49 All_Harvest.Rmd
+	-rwxr-xr-x 1 tmcphill tmcphill     226 Mar 24 15:49 All_Harvest.Rproj
+	-rw-r--r-- 1 tmcphill tmcphill  332060 Mar 24 15:57 Harvest_All_Sectors.csv
+	-rw-r--r-- 1 tmcphill tmcphill     139 Mar 24 15:49 Makefile
+	```
+
+	And that the repo has been restored to its initial state:
 
 	```
 	all-harvest-repro$ git status
@@ -194,5 +228,5 @@ This repo allows the analysis associated with the dataset with identifier [doi:1
 	nothing to commit, working tree clean
 	```
 
-9.
+
 
