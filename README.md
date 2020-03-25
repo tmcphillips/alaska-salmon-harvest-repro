@@ -1,6 +1,6 @@
 # all_harvest_repro
 
-This repo allows the analysis associated with the dataset with identifier [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The analysis can be run either noninteractively via the *`run`* Make target at the command line, or interactively in an RStudio instance running in a container started using the *`start`* Make target. The Makefile includes targets for building the Docker image that contains all software dependencies.
+This repo allows the analysis associated with the dataset with identifier [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The analysis can be run either noninteractively via the *`make run`* command, or interactively in an RStudio instance running in a container started with the command *`make start`*. The *`make clean`* command deletes previously computed outputs, and *`git status`* can be used to confirm that recomputed outputs are identical to the originals. The Makefile includes targets for building the Docker image that contains all software dependencies.
 
 ### Tutorial 1 - Rerunning the analysis noninteractiely at the command line
 
