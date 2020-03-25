@@ -6,12 +6,6 @@ The purpose of is repo to enable the analysis associated with the dataset [doi:1
 
 The analysis can be run either noninteractively via the *`make run`* command, or interactively in an RStudio instance running in a container started with the command *`make start`*. The *`make clean`* command deletes previously computed outputs, and *`git status`* can be used to confirm that previously results have been deleted, and again to verify that recomputed outputs are identical to the originals. The Makefile includes targets for building the Docker image that contains all software dependencies.
 
-## Licensing
-
-The files in the `analysis` directory of the repo are licensed under the Creative Commons Attribution 4.0 International License, the license under which the data set was originally distributed. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/
-
-All other contents of this repo are licensed under the MIT license and therefor can be reused in products with more restrictive licenses. See https://mit-license.org/.
-
 ## Tutorials
 
 The tutorials below demonstrate how to use the tools and data in this repo to reproduce the original analysis.
@@ -145,5 +139,13 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 	nothing to commit, working tree clean
 	```
 
+### Tutorial 2 - Rerunning the analysis with RStudio
 
+
+
+## Licensing
+
+The files in the `analysis` directory of the repo are licensed under the Creative Commons Attribution 4.0 International License, the license under which the data set was originally distributed. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/
+
+All other contents of this repo are licensed under the MIT license and therefore can be reused in products with more restrictive licenses. See https://mit-license.org/.
 
