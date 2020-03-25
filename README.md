@@ -2,7 +2,7 @@
 
 ## Overview
 
-The purpose of is repo to enable the analysis associated with the dataset [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) to be re-executed on any computer that has Git, Docker, and GNU Make installed.
+The purpose of is repo to enable the analysis associated with the dataset [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The versions of R, RStudio Server, and R packages required to run the analysis are preinstalled in a Docker image associated with this repo; this image is used automatically by the targets in the Makefile.
 
 The analysis can be run either noninteractively via the *`make run`* command, or interactively in an RStudio instance running in a container started with the command *`make start`*. The *`make clean`* command deletes previously computed outputs, and *`git status`* can be used to confirm that previously results have been deleted, and again to verify that recomputed outputs are identical to the originals. The Makefile includes targets for building the Docker image that contains all software dependencies.
 
@@ -10,7 +10,7 @@ The analysis can be run either noninteractively via the *`make run`* command, or
 
 The tutorials below demonstrate how to use the tools and data in this repo to reproduce the original analysis.
 
-### Tutorial 1 - Rerunning the analysis noninteractiely at the command line
+### Tutorial 1 - Rerun the analysis at the command line
 
 1. Ensure that Git, Docker, and GNU Make are installed on your MacOS, Linux or Windows computer:
 
@@ -139,7 +139,7 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 	nothing to commit, working tree clean
 	```
 
-### Tutorial 2 - Rerunning the analysis with RStudio
+### Tutorial 2 - Rerun the analysis in RStudio
 
 
 
