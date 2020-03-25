@@ -159,8 +159,8 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 	Authenticate with username `repro`, password `repro`:
 
-	![](https://lh3.googleusercontent.com/weAOxk8FHFAobkt0Ho6VRINOobd91INKmHUtIT6wTl0U2GlAeTrHwEjlDUCzajAtA_BsLmvKZPoY=s400)
-
+	![enter image description here](https://lh3.googleusercontent.com/1QPZbu-VgzOUwPw6yAnqLlsyw-9vvG1_VUceinkOsh8jeJimm5hucOuRkFSIPa8HGI3v15hSz4T9=s400 "image001")
+	
 3.  Confirm that the RStudio interface appears in your browser with the contents of the analysis folder displayed in the bottom right pane of RStudio:
 
 	![](https://lh3.googleusercontent.com/SRhJgxUcoi87S-hu-dEH1-5pg2SeJth9csSGmVRmVpvjIjUCYZQOCdkdtgJtKj1HMM3VXVOvPMDk=s800)
