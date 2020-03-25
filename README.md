@@ -141,8 +141,7 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 ### Tutorial 2 - Rerun the analysis in RStudio
 
-1. Start the RStudio server:
-
+1. Start the RStudio server in a Docker container:
 	```
 	all-harvest-repro$ make server
 
@@ -152,43 +151,66 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 	Exit from this terminal session to shut down RStudio Server.
 	--------------------------------------------------------------------------
-	```
 
+	repro@c2954130ea22:/mnt/all-harvest-repro$
+	```
+	
 2.  Connect to the RStudio Server instance running in the container by following this link in your web browser:  http://localhost:8787
 
 	Authenticate with username `repro`, password `repro`:
 
+	![](https://lh3.googleusercontent.com/weAOxk8FHFAobkt0Ho6VRINOobd91INKmHUtIT6wTl0U2GlAeTrHwEjlDUCzajAtA_BsLmvKZPoY=s400)
+
 3.  Confirm that the RStudio interface appears in your browser with the contents of the analysis folder displayed in the bottom right pane of RStudio:
+
+	![](https://lh3.googleusercontent.com/SRhJgxUcoi87S-hu-dEH1-5pg2SeJth9csSGmVRmVpvjIjUCYZQOCdkdtgJtKj1HMM3VXVOvPMDk=s800)
 
 4.  At the command prompt where was started use the `make clean` command to delete the products of the data analysis, `Harvest_All_Sectors.csv` and `All_Harvest.html`:
 
 	```
-	repro@d991d60d4703:/mnt/all-harvest-repro$ make clean
-	bash -ic 'make -C /mnt/all-harvest-repro/analysis clean'
-	make[1]: Entering directory '/mnt/all-harvest-repro/analysis'
-	rm -rf Harvest_All_Sectors.csv All_Harvest.html
+	repro@c2954130ea22:/mnt/all-harvest-repro$ make clean  
+	bash -ic 'make -C /mnt/all-harvest-repro/analysis clean'  
+	make[1]: Entering directory '/mnt/all-harvest-repro/analysis'  
+	rm -rf Harvest_All_Sectors.csv All_Harvest.html  
 	make[1]: Leaving directory '/mnt/all-harvest-repro/analysis'
 	```
-
 	Note in the RStudio interface that these two files no longer appear in the bottom right pane:
 
+	![](https://lh3.googleusercontent.com/stkE9tdJWublRPi-Ir54Vr4q4LmYIeZUzj9ZzFzTja-k_aXkbSxZqwDXmRK_sJDd8AhLy2IQc6FY=s800)
 
 5.  Open the RMarkdown document `All_Harvest.rmd` by clicking on it in the bottom right panel of RStudio:
 
-6.  Click the `Knit` button in the toolbar immediately above the editor pane:
+	![](https://lh3.googleusercontent.com/1yQ2P3MjPgUOoZpR4NxVpo-HcaKod6adp6nxQ93f12HHyZQosyeVeMUtxuyilKqWWeRynu3Dr48f=s800)
 
+6.  Click the `Knit` button in the toolbar immediately above the editor pane.  A new browser window will open displaying the file `All_Harvest.html` that was just rendered:
 
-	A new browser window will open displaying the file `All_Harvest.html` that was just rendered.
+	![](https://lh3.googleusercontent.com/4zVFAGZZHWKu7GK5q6E0XYY8lF42ZNChwTQ5XN0sXolNmrr1n-OzP2oK4ui-p-oDvfIQqVPQxHaZ=s800)
 
 7.  Note in the RStudio interface that the two files deleted previously by *`make clean`* have now been restored:
 
+	![enter image description here](https://lh3.googleusercontent.com/76U5Nt-tBKFtWAHixbuIKYxNrXajtGIDj0b3FkdF23Btxv-zFgMjp3CIxh2Rgml-KS_idgn_rZoA=s800)
+
 8.  At the command prompt confirm using *`git status`* that the repository has been restored to its initial state:
+	```
+	repro@c2954130ea22:/mnt/all-harvest-repro$ git status
+	On branch master
+	Your branch is up to date with 'origin/master'.
+
+	nothing to commit, working tree clean
+	```
 
 9.  Exit the terminal session to shut down the RStudio server and stop the container:
+
+	```
+	repro@c2954130ea22:/mnt/all-harvest-repro$ exit
+	logout
+	all-harvest-repro$
+	```
 
 ## Licensing
 
 The files in the `analysis` directory of the repo are licensed under the Creative Commons Attribution 4.0 International License, the license under which the data set was originally distributed. To view a copy of this license, visit http://creativecommons.org/licenses/by/4.0/
 
 All other contents of this repo are licensed under the MIT license and therefore can be reused in products with more restrictive licenses. See https://mit-license.org/.
+
 
