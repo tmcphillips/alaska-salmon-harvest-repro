@@ -154,25 +154,25 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 	repro@c2954130ea22:/mnt/all-harvest-repro$
 	```
-	
+
 2.  Connect to the RStudio Server instance running in the container by following this link in your web browser:  http://localhost:8787
 
 	Authenticate with username `repro`, password `repro`:
 
-	![](https://lh3.googleusercontent.com/dEet6WzdyWZVYalC3tPyBW2beERu-ctq8xsW7X-9tAcmQ1JwXof6IKx2fu6y4ZzJdT9Z5rS_ytZi=s300 "image002.png")
+	![](./docs/images/image002.png =400x)
 
 
 3.  Confirm that the RStudio interface appears in your browser with the contents of the analysis folder displayed in the bottom right pane of RStudio:
 
-![](https://lh3.googleusercontent.com/S-JRPwwfQGq7AnVFQRnj1Ozil2MlGBJfMKFfVsxkn4U94mxT86IrlOo8TjjRmUSjq-Igy8JeO1nX=s800 "image003.png")
+![](https://lh3.googleusercontent.com/S-JRPwwfQGq7AnVFQRnj1Ozil2MlGBJfMKFfVsxkn4U94mxT86IrlOo8TjjRmUSjq-Igy8JeO1nX =800 "image003.png")
 
 4.  At the command prompt where was started use the `make clean` command to delete the products of the data analysis, `Harvest_All_Sectors.csv` and `All_Harvest.html`:
 
 	```
-	repro@c2954130ea22:/mnt/all-harvest-repro$ make clean  
-	bash -ic 'make -C /mnt/all-harvest-repro/analysis clean'  
-	make[1]: Entering directory '/mnt/all-harvest-repro/analysis'  
-	rm -rf Harvest_All_Sectors.csv All_Harvest.html  
+	repro@c2954130ea22:/mnt/all-harvest-repro$ make clean
+	bash -ic 'make -C /mnt/all-harvest-repro/analysis clean'
+	make[1]: Entering directory '/mnt/all-harvest-repro/analysis'
+	rm -rf Harvest_All_Sectors.csv All_Harvest.html
 	make[1]: Leaving directory '/mnt/all-harvest-repro/analysis'
 	```
 	Note in the RStudio interface that these two files no longer appear in the bottom right pane:
