@@ -159,13 +159,14 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 	Authenticate with username `repro`, password `repro`:
 
-	![](./docs/images/image002.png =400x)
+	<img src="./docs/images/image002.png" width="400">
 
 
 3.  Confirm that the RStudio interface appears in your browser with the contents of the analysis folder displayed in the bottom right pane of RStudio:
 
-![](https://lh3.googleusercontent.com/S-JRPwwfQGq7AnVFQRnj1Ozil2MlGBJfMKFfVsxkn4U94mxT86IrlOo8TjjRmUSjq-Igy8JeO1nX =800 "image003.png")
-
+	
+	<img src="./docs/images/image003.png" width="800">
+	
 4.  At the command prompt where was started use the `make clean` command to delete the products of the data analysis, `Harvest_All_Sectors.csv` and `All_Harvest.html`:
 
 	```
@@ -176,6 +177,8 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 	make[1]: Leaving directory '/mnt/all-harvest-repro/analysis'
 	```
 	Note in the RStudio interface that these two files no longer appear in the bottom right pane:
+
+	<img src="./docs/images/image003.png" width="800">
 
 	![](https://lh3.googleusercontent.com/stkE9tdJWublRPi-Ir54Vr4q4LmYIeZUzj9ZzFzTja-k_aXkbSxZqwDXmRK_sJDd8AhLy2IQc6FY=s800)
 
