@@ -141,6 +141,8 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 ### Tutorial 2 - Rerun the analysis in RStudio
 
+1. Start the RStudio server:
+
 
 
 ## Licensing
