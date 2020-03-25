@@ -4,7 +4,7 @@
 
 The purpose of is repo to enable the analysis associated with the dataset [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The versions of R, RStudio Server, and R packages required to run the analysis are preinstalled in a Docker image associated with this repo; this image is used automatically by the targets in the Makefile.
 
-The analysis can be run either noninteractively via the *`make run`* command, or interactively in an RStudio instance running in a container started with the command *`make start`*. The *`make clean`* command deletes previously computed outputs, and *`git status`* can be used to confirm that previously results have been deleted, and again to verify that recomputed outputs are identical to the originals. The Makefile includes targets for building the Docker image that contains all software dependencies.
+The analysis can be run either noninteractively via the *`make run`* command, or interactively in an RStudio instance running in a container started with the command *`make server`*. The *`make clean`* command deletes previously computed outputs, and *`git status`* can be used to confirm that previously results have been deleted, and again to verify that recomputed outputs are identical to the originals. The Makefile includes targets for building the Docker image that contains all software dependencies.
 
 ## Tutorials
 
@@ -143,7 +143,48 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 1. Start the RStudio server:
 
+	```
+	all-harvest-repro$ make server
 
+	--------------------------------------------------------------------------
+	The RStudio Server is now running.  Connect to it by navigating in your
+	web browser to http://localhost:8787 (Username: repro, Password: repro)
+
+	Exit from this terminal session to shut down RStudio Server.
+	--------------------------------------------------------------------------
+	```
+
+2.  Connect to the RStudio Server instance running in the container by following this link in your web browser:  http://localhost:8787
+
+	Authenticate with username `repro`, password `repro`:
+
+3.  Confirm that the RStudio interface appears in your browser with the contents of the analysis folder displayed in the bottom right pane of RStudio:
+
+4.  At the command prompt where was started use the `make clean` command to delete the products of the data analysis, `Harvest_All_Sectors.csv` and `All_Harvest.html`:
+
+	```
+	repro@d991d60d4703:/mnt/all-harvest-repro$ make clean
+	bash -ic 'make -C /mnt/all-harvest-repro/analysis clean'
+	make[1]: Entering directory '/mnt/all-harvest-repro/analysis'
+	rm -rf Harvest_All_Sectors.csv All_Harvest.html
+	make[1]: Leaving directory '/mnt/all-harvest-repro/analysis'
+	```
+
+	Note in the RStudio interface that these two files no longer appear in the bottom right pane:
+
+
+5.  Open the RMarkdown document `All_Harvest.rmd` by clicking on it in the bottom right panel of RStudio:
+
+6.  Click the `Knit` button in the toolbar immediately above the editor pane:
+
+
+	A new browser window will open displaying the file `All_Harvest.html` that was just rendered.
+
+7.  Note in the RStudio interface that the two files deleted previously by *`make clean`* have now been restored:
+
+8.  At the command prompt confirm using *`git status`* that the repository has been restored to its initial state:
+
+9.  Exit the terminal session to shut down the RStudio server and stop the container:
 
 ## Licensing
 
