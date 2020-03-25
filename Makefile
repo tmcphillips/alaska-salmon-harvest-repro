@@ -36,7 +36,7 @@ run:                    ## Run analysis and render R Markdown.
 clean:                  ## Delete all products of the analysis.
 	$(RUN_IN_REPRO) 'make -C $(REPRO_DIR)/analysis clean'
 
-rstudio:                ## Start RStudio Server and load the All_Harvest project.
+server:                 ## Start RStudio Server and load the All_Harvest project.
 ifdef IN_RUNNING_REPRO
 	@sudo rstudio-server start
 	@echo "\n--------------------------------------------------------------------------"
@@ -46,7 +46,7 @@ ifdef IN_RUNNING_REPRO
 	@echo   "Exit from this terminal session to shut down RStudio Server."
 	@echo   "--------------------------------------------------------------------------\n"
 else
-	@$(RUN_IN_REPRO) 'make rstudio; bash -il'
+	@$(RUN_IN_REPRO) 'make server; bash -il'
 endif
 
 ## ------------------------------------------------------------------------------
