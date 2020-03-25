@@ -90,75 +90,21 @@ This repo allows the analysis associated with the dataset with identifier [doi:1
 
 	```
 	tmcphill@circe:~/GitRepos/all-harvest-repro$ make run
-	docker run -it --rm -p 8787:8787 --volume /mnt/c/Users/tmcphill/OneDrive/GitRepos/all-harvest-repro:/mnt/all-harvest-repro tmcphillips/all-harvest-repro:latest bash -ic 'make -C /mnt/all-har
-	vest-repro/analysis run'
+	docker run -it --rm -p 8787:8787 --volume /mnt/c/Users/tmcphill/OneDrive/GitRepos/all-harvest-repro:/mnt/all-harvest-repro tmcphillips/all-harvest-repro:latest bash -ic 'make -C /mnt/all-harvest-repro/analysis run'
 	make: Entering directory '/mnt/all-harvest-repro/analysis'
 	R -e "rmarkdown::render('All_Harvest.Rmd',output_file='All_Harvest.html')"
 	> rmarkdown::render('All_Harvest.Rmd',output_file='All_Harvest.html')
 	processing file: All_Harvest.Rmd
 	|...                                                                   |   5%
 	ordinary text without R code
-	|.......                                                               |  10%
-	label: setup (with options)
-	List of 1
-	$ include: logi FALSE
-	|..........                                                            |  14%
-	ordinary text without R code
-	|.............                                                         |  19%
-	label: unnamed-chunk-1
-	Attaching package: 'dplyr'
-	The following objects are masked from 'package:stats':
-		filter, lag
-	The following objects are masked from 'package:base':
-		intersect, setdiff, setequal, union
-	|.................                                                     |  24%
-	ordinary text without R code
-	|....................                                                  |  29%
-	label: unnamed-chunk-2
-	|.......................                                               |  33%
-	ordinary text without R code
-	|...........................                                           |  38%
-	label: unnamed-chunk-3
-	Joining, by = c("year", "SASAP.Region", "species")
-	|..............................                                        |  43%
-	ordinary text without R code
-	|.................................                                     |  48%
-	label: unnamed-chunk-4
-	|.....................................                                 |  52%
-	ordinary text without R code
-	|........................................                              |  57%
-	label: unnamed-chunk-5 (with options)
-	List of 1
-	$ eval: symbol F
-	|...........................................                           |  62%
-	ordinary text without R code
-	|...............................................                       |  67%
-	label: unnamed-chunk-6
-	|..................................................                    |  71%
-	ordinary text without R code
-	|.....................................................                 |  76%
-	label: unnamed-chunk-7
-	|.........................................................             |  81%
-	ordinary text without R code
-	|............................................................          |  86%
-	label: unnamed-chunk-8 (with options)
-	List of 5
-	$ message   : symbol F
-	$ warning   : symbol F
-	$ eval      : symbol T
-	$ fig.width : num 8
-	$ fig.height: num 10
-	|...............................................................       |  90%
-	ordinary text without R code
-	|...................................................................   |  95%
+	.
+	.
+	.
 	label: unnamed-chunk-9
 	|......................................................................| 100%
 	ordinary text without R code
 	output file: All_Harvest.knit.md
-	/usr/local/bin/pandoc +RTS -K512m -RTS All_Harvest.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash+smart --output All_Harvest.html --email-obfuscation none --
-	self-contained --standalone --section-divs --template /usr/local/lib/R/site-library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable 'theme:bootstrap' --includ
-	e-in-header /tmp/RtmptCD3ex/rmarkdown-str85114df12.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /usr/local/
-	lib/R/site-library/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmd/lua/latex-div.lua
+	/usr/local/bin/pandoc +RTS -K512m -RTS All_Harvest.utf8.md --to html4 --from markdown+autolink_bare_uris+tex_math_single_backslash+smart --output All_Harvest.html --email-obfuscation none --self-contained --standalone --section-divs --template /usr/local/lib/R/site-library/rmarkdown/rmd/h/default.html --no-highlight --variable highlightjs=1 --variable 'theme:bootstrap' --include-in-header /tmp/RtmptCD3ex/rmarkdown-str85114df12.html --mathjax --variable 'mathjax-url:https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML' --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmd/lua/pagebreak.lua --lua-filter /usr/local/lib/R/site-library/rmarkdown/rmd/lua/latex-div.lua
 	Output created: All_Harvest.html
 	>
 	make: Leaving directory '/mnt/all-harvest-repro/analysis'
