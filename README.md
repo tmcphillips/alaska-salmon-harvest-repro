@@ -158,8 +158,7 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 2.  Connect to the RStudio Server instance running in the container by following this link in your web browser:  http://localhost:8787
 
 	Authenticate with username `repro`, password `repro`:
-
-	![enter image description here](https://lh3.googleusercontent.com/1QPZbu-VgzOUwPw6yAnqLlsyw-9vvG1_VUceinkOsh8jeJimm5hucOuRkFSIPa8HGI3v15hSz4T9=s400 "image001")
+![enter image description here](https://lh3.googleusercontent.com/0tCuzev0XDWMT_-UcRnQSlU5mmKIWXV3WdeQxNnzFqMl-jArQ0WQSS5xAwILliXuRYi2oXVW6po6=s400 "image001.png")
 	
 3.  Confirm that the RStudio interface appears in your browser with the contents of the analysis folder displayed in the bottom right pane of RStudio:
 
