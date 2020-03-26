@@ -1,11 +1,11 @@
 # All-Harvest-Repro
-## Alaska Salmon Harvest - All Sectors - 1995-2016
+### Alaska Salmon Harvest - All Sectors - 1995-2016
 
 ## Overview
 
-The purpose of is repo to enable the analysis associated with the dataset [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The versions of R, RStudio Server, and R packages required to run the analysis are preinstalled in a Docker image associated with this repo; this image is used automatically by the targets in the Makefile.
+The purpose of this repo to enable the analysis associated with the dataset [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) (*Harvest of Salmon across Commercial, Subsistence, Personal Use, and Sport Fish sectors, Alaska, 1995-2016*; [Jeanette Clark](http://orcid.org/0000-0003-4703-1974) and  and Alaska Department of Fish and Game) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The versions of R, RStudio Server, and R packages required to run the analysis are preinstalled in a Docker image associated with this repo; this image is used automatically by the targets in the Makefile.
 
-The analysis can be run either noninteractively via the *`make run`* command, or interactively in an RStudio instance running in a container started with the command *`make server`*. The *`make clean`* command deletes previously computed outputs, and *`git status`* can be used to confirm that previously results have been deleted, and again to verify that recomputed outputs are identical to the originals. The Makefile includes targets for building the Docker image that contains all software dependencies.
+The analysis can be run either noninteractively via the *`make run`* command, or interactively in an RStudio instance running in a container started with the command *`make server`*. The *`make clean`* command deletes previously computed outputs, and *`git status`* can be used to confirm that previously computed results have been deleted, and again to verify that recomputed outputs are identical to the originals. The Makefile includes targets for building the required Docker image.
 
 ## Tutorials
 
