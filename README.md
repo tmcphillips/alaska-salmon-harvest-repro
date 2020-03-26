@@ -3,9 +3,11 @@
 
 ## Overview
 
-The purpose of this repo to enable the analysis associated with the dataset [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) (*Harvest of Salmon across Commercial, Subsistence, Personal Use, and Sport Fish sectors, Alaska, 1995-2016*; [Jeanette Clark](http://orcid.org/0000-0003-4703-1974) and  and Alaska Department of Fish and Game) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The versions of R, RStudio Server, and R packages required to run the analysis are preinstalled in a Docker image associated with this repo; this image is used automatically by the targets in the Makefile.
+The purpose of this repo to enable the analysis associated with the dataset [doi:10.5063/F1BV7DV0](https://knb.ecoinformatics.org/view/doi:10.5063/F1BV7DV0) (*Harvest of Salmon across Commercial, Subsistence, Personal Use, and Sport Fish sectors, Alaska, 1995-2016*; [Jeanette Clark](http://orcid.org/0000-0003-4703-1974) & Alaska Department of Fish and Game) to be re-executed on any computer that has Git, Docker, and GNU Make installed. The versions of R, RStudio Server, and R packages required to run the analysis are preinstalled in a Docker image associated with this repo; the Docker image is used automatically by the targets in the Makefile as needed.
 
-The analysis can be run either noninteractively via the *`make run`* command, or interactively in an RStudio instance running in a container started with the command *`make server`*. The *`make clean`* command deletes previously computed outputs, and *`git status`* can be used to confirm that previously computed results have been deleted, and again to verify that recomputed outputs are identical to the originals. The Makefile includes targets for building the required Docker image.
+Makefile targets that use the Docker image mount the working directory within the running container. Any changes made to repository contents are reflected in the running container.  Similarly, outputs of the analysis running in the container are immediately accessible outside the container.
+
+The analysis can be run either noninteractively via the *`make run`* command, or interactively in an RStudio instance running in a container started with the command *`make server`*. The *`make clean`* command deletes previously computed outputs.  The command *`git status`* can be used to confirm that previously computed results have been deleted, and again to verify that recomputed outputs are identical to the originals. The Makefile includes targets for building the required Docker image.
 
 ## Tutorials
 
@@ -160,7 +162,7 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 	Authenticate with username `repro`, password `repro`:
 
-	<img src="./.images/image002.png" width="200">
+	<img src="./.images/image002.png" width="300">
 
 
 3.  Confirm that the RStudio interface appears in your browser with the contents of the analysis folder displayed in the bottom right pane of RStudio:
@@ -168,7 +170,7 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 	<img src="./.images/image003.png" width="800">
 
-4.  At the command prompt where was started use the `make clean` command to delete the products of the data analysis, `Harvest_All_Sectors.csv` and `All_Harvest.html`:
+4.  At the command prompt use the `make clean` command to delete the products of the data analysis, `Harvest_All_Sectors.csv` and `All_Harvest.html`:
 
 	```
 	repro@c2954130ea22:/mnt/all-harvest-repro$ make clean
