@@ -33,7 +33,7 @@ WORKDIR $HOME
 
 ENV REPRO_MNT /mnt/${REPRO_NAME}
 
-COPY --chown=1000:1000 ./docker/.rstudio ${HOME}/.rstudio
+COPY --chown=1000:1000 ./.docker/.rstudio ${HOME}/.rstudio
 
 RUN echo "export IN_RUNNING_REPRO=${REPRO_NAME}" >> .bashrc
 RUN echo "cd ${REPRO_MNT}" >> .bashrc

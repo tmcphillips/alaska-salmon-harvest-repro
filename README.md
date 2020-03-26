@@ -159,13 +159,13 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 
 	Authenticate with username `repro`, password `repro`:
 
-	<img src="./docs/images/image002.png" width="200">
+	<img src="./.images/image002.png" width="200">
 
 
 3.  Confirm that the RStudio interface appears in your browser with the contents of the analysis folder displayed in the bottom right pane of RStudio:
 
 
-	<img src="./docs/images/image003.png" width="800">
+	<img src="./.images/image003.png" width="800">
 
 4.  At the command prompt where was started use the `make clean` command to delete the products of the data analysis, `Harvest_All_Sectors.csv` and `All_Harvest.html`:
 
@@ -178,19 +178,19 @@ The tutorials below demonstrate how to use the tools and data in this repo to re
 	```
 	Note in the RStudio interface that these two files no longer appear in the bottom right pane:
 
-	<img src="./docs/images/image004.png" width="800">
+	<img src="./.images/image004.png" width="800">
 
 5.  Open the RMarkdown document `All_Harvest.rmd` by clicking on it in the bottom right panel of RStudio:
 
-	<img src="./docs/images/image005.png" width="800">
+	<img src="./.images/image005.png" width="800">
 
 6.  Click the `Knit` button in the toolbar immediately above the editor pane.  A new browser window will open displaying the file `All_Harvest.html` that was just rendered:
 
-	<img src="./docs/images/image006.png" width="800">
+	<img src="./.images/image006.png" width="800">
 
 7.  Note in the RStudio interface that the two files deleted previously by *`make clean`* have now been restored:
 
-	<img src="./docs/images/image007.png" width="800">
+	<img src="./.images/image007.png" width="800">
 
 8.  At the command prompt confirm using *`git status`* that the repository has been restored to its initial state:
 	```
